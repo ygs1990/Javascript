@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Animation of Javascript</title>
+	<style>
+	.animation {
+		width: 200px;
+		height: 100px;
+		background-color: red;
+	}
+</style>
+</head>
+<body>
+	<div id="demo" class="animation"></div>
+	<script>
+		// 获取需要实现动画效果的元素
+		var oEl = document.getElementById('demo');
+		// 要实现动画效果，元素必须是三种定位中的一种
+		oEl.style.position = 'absolute';
+		var start = 0;
+
+		// 动画执行的回调
+		function callback(time) {
+			if (!start) {
+				start = time;
+			}
+			var progress = time - start;
+			// 左边距移动的距离
+			oEl.style.left = Math.min(progress / 10, 200) + 'px';
+
+			if (progress < 2000) {
+				window.requestAnimationFrame(callback);
+			}
+		}
+
+		// 执行动画回调
+		window.requestAnimationFrame(callback);
+	</script>
+</body>
+</html>
